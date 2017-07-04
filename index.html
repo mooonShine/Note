@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<title>选择器</title>
+</head>
+<body>
+	<div id="lastname">div1</div>
+	<br />
+	<div class="intro">div2</div>
+	<br />
+	<div class="intro demo">div3</div>
+	<br />
+
+	<p>p1</p>
+	<br />
+	<p>p2</p>
+	<br />
+	<p>p3</p>
+	<br />
+	<p>chool</p>
+	<br />
+	<p style="display:none;">p4</p>
+	<br />
+
+	<tr>tr1</tr>
+	<br />
+	<tr>tr2</tr>
+	<br />
+	<tr>tr3</tr>
+	<br />
+	<tr>tr4</tr>
+	<br />
+	<ul>
+		<li>li1</li>
+		<li>li2</li>
+		<li>li3</li>
+		<li>li4</li>
+	</ul>
+	<input value="">input0</input>
+<br />
+<input type="text" value="1">input1</input>
+<br />
+<input type="password" value="2">input2</input>
+<br />
+<input type="radio" value="3">input3</input>
+<br />
+<input type="checkbox" value="4">input4</input>
+<br />
+<input type="submit" value="5">input5</input>
+<br />
+<input type="reset" value="6">input6</input>
+<br />
+<input type="button" value="7">input7</input>
+<br />
+<input type="image" value="8">input8</input>
+<br />
+<input type="file" value="9">input9</input>
+<br />
+<input type="radio" value="10" checked="checked">input10</input>
+<br />
+<input type="checkbox" value="11" checked="checked">input11</input>
+<br />
+<input type="" value="12" disabled="disabled">input12</input>
+<br />
+
+<h1>h1</h1>
+<br />
+<h2>h2</h2>
+<br />
+<h3>h3</h3>
+<br />
+<h4>h4</h4>
+<br />
+<h5>h5</h5>
+<br />
+<h6>h6</h6>
+<br />
+<a>a1</a>
+<br />
+<a href="#">a2</a>
+<br />
+<a href="http://baidu.com/1.jpg">a3</a>
+<br />
+<a>a4</a>
+<br />
+
+<select>
+<option value="1">option1</option>
+<option value="2" selected="selected">option2</option>
+<option value="3">option3</option>
+<option value="4">option4</option>
+</select>
+</body>
+
+<script src="../jquery-1.8.1.js"></script>
+<script type="text/javascript" >
+$("*");	//所有元素
+$("#lastname");	//id="lastname" 的元素
+$(".intro");	//所有 class="intro" 的元素
+$("p");	//所有 <p> 元素
+$(".intro.demo");	//所有 class="intro" 且 class="demo" 的元素
+ 	 	 
+$("p:first");	//第一个 <p> 元素
+$("p:last");	//最后一个 <p> 元素
+$("tr:even");	//所有偶数 <tr> 元素
+$("tr:odd");	//所有奇数 <tr> 元素
+ 	 	 
+$("ul li:eq(3)");	//列表中的第四个元素（index 从 0 开始）
+$("ul li:gt(3)");	//列出 index 大于 3 的元素
+$("ul li:lt(3)");	//列出 index 小于 3 的元素
+$("input:not(:empty)");	//所有不为空的 input 元素
+ 	 	 
+$(":header");	//所有标题元素 <h1> - <h6>  
+$(":animated");	 	//所有动画元素
+ 	 	 
+$(":contains('chool')");	//包含指定字符串的所有元素
+$(":empty");	//无子（元素）节点的所有元素
+$("p:hidden");	//所有隐藏的 <p> 元素
+$("table:visible");	//所有可见的表格
+ 	 	 
+$("th,td,.intro");	//所有带有匹配选择的元素
+ 	 	 
+$("[href]");	//所有带有 href 属性的元素
+$("[href='#']");	//所有 href 属性的值等于 "#" 的元素
+$("[href!='#']");	//所有 href 属性的值不等于 "#" 的元素
+$("[href$='.jpg']");	//所有 href 属性的值包含以 ".jpg" 结尾的元素
+ 	 	 
+$(":input");	//所有 <input> 元素
+$(":text");	//所有 type="text" 的 <input> 元素
+$(":password");	//所有 type="password" 的 <input> 元素
+$(":radio");	//所有 type="radio" 的 <input> 元素
+$(":checkbox");	//所有 type="checkbox" 的 <input> 元素
+$(":submit");	//所有 type="submit" 的 <input> 元素
+$(":reset");	//所有 type="reset" 的 <input> 元素
+$(":button");	//所有 type="button" 的 <input> 元素
+$(":image");	//所有 type="image" 的 <input> 元素
+$(":file");	//所有 type="file" 的 <input> 元素
+ 	 	 
+$(":enabled");	//所有激活的 input 元素
+$(":disabled");	//所有禁用的 input 元素
+$(":selected");	//所有option被选取的元素
+$(":checked");	//所有被选中的 input 元素
+</script>
+</html>
