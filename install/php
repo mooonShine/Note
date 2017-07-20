@@ -1,0 +1,11 @@
+centOS7.3下独立安装php环境遇到的问题
+安装fpm
+yum install php70w-fpm，service php-fpm start
+
+使用yum install php-fpm会报错
+
+Error: php70w-common conflicts with php-common-5.4.16-42.el7.x86_64
+You could try using --skip-broken to work around the problem
+You could try running: rpm -Va --nofiles --nodigest
+
+
