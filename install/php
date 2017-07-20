@@ -1,4 +1,4 @@
-centOS7.3下独立安装php环境遇到的问题
+centOS7.3下独立安装php7环境遇到的问题
 安装fpm
 yum install php70w-fpm，service php-fpm start
 
@@ -8,4 +8,11 @@ Error: php70w-common conflicts with php-common-5.4.16-42.el7.x86_64
 You could try using --skip-broken to work around the problem
 You could try running: rpm -Va --nofiles --nodigest
 
+需要配置nginx.conf　
+ root           /rootToWebFolderPath;
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    include        fastcgi_params;
 
+添加pid文件
