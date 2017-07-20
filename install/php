@@ -17,7 +17,7 @@ You could try running: rpm -Va --nofiles --nodigest
 
 添加pid文件
 
-
+乌班图下安装需要修改php-fpm配置文件。监听端口改成127.0.0.1:9000
 安装zsh
 如果你用 Mac，就可以直接看下一节
 如果你用 Redhat Linux，执行：sudo yum install zsh
