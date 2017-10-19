@@ -1,0 +1,56 @@
+安装php7 apt-get install php7.0-fpm
+
+安装openresty
+
+1.先安装开发库
+    apt-get install libreadline-dev libncurses5-dev libpcre3-dev \
+    libssl-dev perl make build-essential
+2.下载最新版openresty后tar -xzvf openresty-VERSION.tar.gz
+
+3.然后在进入 openresty-VERSION/ 目录, 然后输入以下命令配置:
+
+./configure
+默认, --prefix=/usr/local/openresty 程序会被安装到/usr/local/openresty目录。
+
+您可以指定各种选项，比如
+
+./configure --prefix=/opt/openresty \
+            --with-luajit \
+            --without-http_redis2_module \
+            --with-http_iconv_module \
+            --with-http_postgres_module
+试着使用 ./configure --help 查看更多的选项。
+
+配置文件（./configure script）运行出错可以到 build/nginx-VERSION/objs/autoconf.err 找到。 VERSION 的地方必须与OpenResty版本号相对应, 比如 0.8.54.6。
+
+Solaris的用户请注意：
+对于 Solaris,安装开发库一般通过 OpenSSL 的形式插入 /lib, 因此当编译时出现 missing OpenSSL 说明您已经安装过了t, 特别是一些选项的时候 --with-ld-opt='-L/lib' 。
+
+make
+您可以使用下面的命令来编译：
+
+make
+如果您的电脑支持多核 make 工作的特性, 您可以这样编译:
+
+make -j2
+假设您是的机器是双核。
+
+make install
+如果前面的步骤都没有问题的话,您可以使用下面的命令安装l OpenResty到您的系统之中：
+
+make install
+
+安装完成后需要配置nginx
+location ~ \.php$ {
+            root           /data/www/;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+
+        include vhost/*.conf;
+
+安装mysql apt-get install mysql-server
+
