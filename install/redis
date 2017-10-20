@@ -1,0 +1,112 @@
+1、  从http://redis.io/ 下载redis-3.2.4.tar.gz
+2、 上传到linux后移动到/opt/redis目录下
+3、 解压 sudo tar -zxvf redis-3.2.4.tar.gz
+4、 进入解压后的文件夹进行编译 make
+5、 安装 make install
+6、 测试一下 make test
+             报错缺少tcl （tcl 是一种解译语言，也是一套 C 的函式库）
+                       安装tcl  apt-get install tcl
+             报错Executing test client: NOREPLICAS Not enoughgood slaves to write..
+                       修改文件tests/integration/replication-2.tcl，将after 1000改为after 10000以延长等待时间。
+            报错[err]: Server is able to generate a stack trace on selected systems in tests/integration/logging.
+                      只是某个测试没有通过，可以忽略。
+7、创建Redis配置目录 /etc/redis
+                mkdir /etc/redis
+8、拷贝配置文件：
+                cp /opt/redis/redis-3.2.4/redis.conf/ /etc/redis
+9、编辑配置文件（暂未编辑）
+              修改端口、配置数据库保存目录、其它
+10、（1）通过指定配置文件启动；
+                       redis-server /etc/redis/redis.conf
+        （2）通过命令redis-server 启动，可在命令后加上`&`号使redis以后台程序方式运行；
+                        redis-server &
+11、客户端登陆 redis-cli
+12、关闭Redis服务 redis-cli shutdown
+
+ 设置redis开机启动
+修改redis.conf（/etc/redis下）
+          #打开后台运行选项
+         daemonize yes
+         #设置日志文件路径
+         logfile "/var/log/redis/redis.log"
+编写脚本
+        vim /etc/init.d/redis
+[plain] view plain copy
+#!/bin/sh
+# chkconfig: 2345 10 90
+# description: Start and Stop redis
+
+PATH=/usr/local/bin
+REDISPORT=6379
+EXEC=/usr/local/bin/redis-server
+REDIS_CLI=/usr/local/bin/redis-cli
+PIDFILE=/var/run/redis.pid
+CONF="/etc/redis/redis.conf"
+
+case "$1" in
+    start)
+        if [ -f $PIDFILE ]
+        then
+            echo "$PIDFILE exists, process is already running or crashed."
+        else
+            echo "Starting Redis server..."
+            $EXEC $CONF
+        fi
+        if [ "$?"="0" ]
+        then
+            echo "Redis is running..."
+        fi
+        ;;
+    stop)
+        if [ ! -f $PIDFILE ]
+        then
+            echo "$PIDFILE exists, process is not running."
+        else
+            PID=$(cat $PIDFILE)
+            echo "Stopping..."
+            $REDIS_CLI -p $REDISPORT SHUTDOWN
+            while [ -x $PIDFILE ]
+            do
+                echo "Waiting for Redis to shutdown..."
+                sleep 1
+            done
+            echo "Redis stopped"
+        fi
+        ;;
+    restart|force-reload)
+        ${0} stop
+        ${0} start
+        ;;
+    *)
+        echo "Usage: /etc/init.d/redis {start|stop|restart|fore-reload}"
+        exit 1
+esac
+
+添加脚本的执行权限
+        sudo chmod +x /etc/init.d/redis
+设置开机自动启动
+       sudo update-rc.d redis defaults
+       报错：
+
+      上面为两个错误
+       第一个参考https://my.oschina.net/u/943306/blog/345923
+            解决方法：安装一个中文语言，系统就知道zh_CN.UTF-8了，这个时候用perl就不会报错了
+                  apt-get install language-pack-zh-hans
+      第二个参考：http://bashell.nodemedia.cn/archives/directspace-debian-6-vps-vzquota-missing.html
+           解决方法：编辑/etc/init.d/redis
+                在文件头部#!/bin/sh下面添加
+                ### BEGIN INIT INFO
+                # Provides: OSSEC HIDS
+                # Required-Start: $network $remote_fs $syslog $time
+                # Required-Stop:
+                # Default-Start: 2 3 4 5
+                # Default-Stop: 0 1 6
+                # Short-Description: OSSEC HIDS
+                ### END INIT INFO
+使用脚本启动服务
+          开启redis： service redis start
+          停止redis： service redis stop
+          重启redis： service redis restart
+         查看服务状态：service redis status
+最后将机器关机，重新启动
+         此时redis服务也启动了。
