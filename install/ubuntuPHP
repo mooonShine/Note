@@ -63,3 +63,11 @@ vim /etc/default/locale修改下面三个参数
 LANG=zh_CN.UTF-8
 LANGUAGE=zh_CN:zh:en_US:en
 LC_ALL=LC_ALL=zh_CN.UTF-8
+
+mysql无法远程链接需要修改mysql配置
+首先我们授权一个叫Ubuntu（叫什么由你定）的账户，并授予它远程连接的权力，命令如下：
+GRANT ALL PRIVILEGES ON *.* TO 'Ubuntu'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+运行完后紧接着输入，以更新数据库：FLUSH PRIVILEGES;
+执行quit退出mysql
+由于MySQL默认支队本地使用，没有开放远程连接，于是需要到配置文件中去修改
+添加'#'注释掉其中的"bind-address = 127.0.0.1"
