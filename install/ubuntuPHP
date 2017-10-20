@@ -53,4 +53,13 @@ location ~ \.php$ {
         include vhost/*.conf;
 
 安装mysql apt-get install mysql-server
+乌班图下安装需要修改pool.d下的www.conf配置文件。监听端口改成127.0.0.1:9000
 
+服务器如果中文乱码.
+先安装中文包
+apt-get -y install language-pack-zh-hans
+然后
+vim /etc/default/locale修改下面三个参数
+LANG=zh_CN.UTF-8
+LANGUAGE=zh_CN:zh:en_US:en
+LC_ALL=LC_ALL=zh_CN.UTF-8

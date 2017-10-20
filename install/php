@@ -17,4 +17,4 @@ You could try running: rpm -Va --nofiles --nodigest
 
 添加pid文件
 
-乌班图下安装需要修改pool.d下的www.conf配置文件。监听端口改成127.0.0.1:9000
+
