@@ -1,0 +1,1 @@
+将本地文件发送到服务器指定目录 scp -r test.tar.gz root@0.0.0.0:/data/www
