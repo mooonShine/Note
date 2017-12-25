@@ -14,12 +14,14 @@
 
 您可以指定各种选项，比如
 
-./configure --prefix=/opt/openresty \
+./configure --prefix=/data/soft/openresty_ngx \
             --with-luajit \
             --without-http_redis2_module \
             --with-http_iconv_module \
             --with-http_postgres_module
 试着使用 ./configure --help 查看更多的选项。
+此处有个坑:可能会报错，ngx_postgres addon was unable to detect version of the libpq librar。
+需安装 apt-get install postgresql-server-devel
 
 配置文件（./configure script）运行出错可以到 build/nginx-VERSION/objs/autoconf.err 找到。 VERSION 的地方必须与OpenResty版本号相对应, 比如 0.8.54.6。
 
