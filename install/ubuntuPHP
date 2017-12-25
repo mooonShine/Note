@@ -28,14 +28,9 @@
 Solaris的用户请注意：
 对于 Solaris,安装开发库一般通过 OpenSSL 的形式插入 /lib, 因此当编译时出现 missing OpenSSL 说明您已经安装过了t, 特别是一些选项的时候 --with-ld-opt='-L/lib' 。
 
-make
 您可以使用下面的命令来编译：
-
 make
-如果您的电脑支持多核 make 工作的特性, 您可以这样编译:
-
-make -j2
-假设您是的机器是双核。
+make可能会报错，因为openssl的版本过高的话会导致报错，可以现在一个低版本opensssl的源码，编译是添加--with-openssl=openssl源码目录
 
 make install
 如果前面的步骤都没有问题的话,您可以使用下面的命令安装l OpenResty到您的系统之中：
