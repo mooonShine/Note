@@ -1,3 +1,0 @@
-mongo后台启动并指定path    ./bin/mongod --fork --dbpath=/data/soft/mongodb/db --logpath=/data/soft/mongodb/log/mongodb.log
-
-memcache启动   /usr/local/bin/memcached -d -m 2048 -u root -c 1024 -p 11211 -P /tmp/memcached1.pid
